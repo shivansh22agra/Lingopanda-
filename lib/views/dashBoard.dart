@@ -25,6 +25,7 @@ class DashBoard extends StatelessWidget {
         children: [HomePage(), Searchpage(), LikePage(), ProfilePage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: GoogleFonts.poppins(),
         unselectedLabelStyle: GoogleFonts.poppins(),

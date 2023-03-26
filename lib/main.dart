@@ -1,8 +1,11 @@
 import 'package:boomer/firebase_options.dart';
 import 'package:boomer/view_models/dashBoardViewModel.dart';
 import 'package:boomer/view_models/homeViewModel.dart';
+import 'package:boomer/views/dashBoard.dart';
 import 'package:boomer/views/dashBoardViews/home_page.dart';
 import 'package:boomer/views/main_page.dart';
+import 'package:boomer/views/otp_screen.dart';
+import 'package:boomer/views/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +41,9 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData.dark(),
             initialRoute: MainPage.id,
             routes: {
-            
+              DashBoard.id: (context) => DashBoard(),
+              SignIn.id: (context) => SignIn(),
+              OtpScreen.id: (context) => OtpScreen(),
               MainPage.id: (context) => MainPage(),
               HomePage.id: (context) => HomePage()
             },
