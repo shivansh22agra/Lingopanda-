@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "608857058872",
+    "project_id": "boomer-cee36",
+    "storage_bucket": "boomer-cee36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608857058872:android:bfffd12b93aba91c4c80cd",
+        "android_client_info": {
+          "package_name": "com.example.boomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608857058872-m2954cibm8ctv7oj5kd0l22g5mq3bdhf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC129oGr2d423pZRqwef6L_qgetV89IGCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608857058872-m2954cibm8ctv7oj5kd0l22g5mq3bdhf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
