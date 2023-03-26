@@ -1,12 +1,36 @@
+import 'package:boomer/views/dashBoard.dart';
 import 'package:boomer/views/otp_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatelessWidget {
   static String id = "/signIn";
   SignIn({super.key});
   TextEditingController phoneController = TextEditingController();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -125,23 +149,7 @@ class SignIn extends StatelessWidget {
                             // final prefs =
                             //     await SharedPreferences.getInstance();
                             // prefs.setBool('loginotp', true);
-                            // final logic = Get.put(SetupProfileLogic());
-                            // logic.isPhone();
-                            // ValidationService validationService =
-                            //     ValidationService();
-                            // // FirebaseAuth.instance.signOut();
-                            // if (validationService
-                            //         .validateMobile(phoneController.text) ==
-                            //     false) {
-                            //   Fluttertoast.showToast(
-                            //       msg:
-                            //           "Please enter valid 10-digit mobile number.");
-                            //   return;
-                            // }
 
-                            // setState(() {
-                            //   navigating = true;
-                            // });
                             // FocusManager.instance.primaryFocus?.unfocus();
                             // await FirebaseAuth.instance.verifyPhoneNumber(
                             //   phoneNumber: "+91${phoneController.text}",
@@ -191,24 +199,15 @@ class SignIn extends StatelessWidget {
                         height: 40.h,
                         child: ElevatedButton(
                           onPressed: () async {
-                            // final prefs =
-                            //     await SharedPreferences.getInstance();
-                            // prefs.setBool('loginotp', false);
-                            // AuthService authService = AuthService();
-                            // setState(() {
-                            //   signingIn = true;
-                            // });
-                            // await authService.handleSignIn();
-                            // setState(() {
-                            //   signingIn = false;
-                            // });
-                            // final logic = Get.put(SetupProfileLogic());
-                            // logic.isPhone();
+                            signInWithGoogle().then((value) {
+                              print('User value $value');
+                              Navigator.pushNamed(context, DashBoard.id);
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
 
-                            primary: Color(0xFFFFFFFF),
+                            backgroundColor: const Color(0xFFFFFFFF),
                             //const Color(0xFF00E283),
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(color: Color(0xFFCCCCCC)),
