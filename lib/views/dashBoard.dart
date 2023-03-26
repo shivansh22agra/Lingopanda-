@@ -18,8 +18,8 @@ class DashBoard extends StatelessWidget {
     DashBoardViewModel dashBoardViewModel = context.watch<DashBoardViewModel>();
     return Scaffold(
       body: PageView(
-        onPageChanged: (index){
-          dashBoardViewModel.toggleTab(index);
+        onPageChanged: (index) {
+          dashBoardViewModel.onPageChanged(index);
         },
         controller: dashBoardViewModel.pageController,
         children: [HomePage(), Searchpage(), LikePage(), ProfilePage()],
@@ -37,21 +37,21 @@ class DashBoard extends StatelessWidget {
           //     icon: Icon(Icons.school_outlined),
           //     label: "Courses"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              activeIcon: Icon(Icons.explore),
-              label: "Explore"),
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: ""),
           BottomNavigationBarItem(
-              activeIcon: Icon(Icons.school),
-              icon: Icon(Icons.school_outlined),
-              label: "Courses"),
+              activeIcon: Icon(Icons.search),
+              icon: Icon(Icons.search_outlined),
+              label: ""),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calculate_outlined),
-              activeIcon: Icon(Icons.calculate_rounded),
-              label: "Tools"),
+              icon: Icon(Icons.favorite_rounded),
+              activeIcon: Icon(Icons.favorite_border_outlined),
+              label: ""),
           BottomNavigationBarItem(
               activeIcon: Icon(Icons.account_circle_rounded),
               icon: Icon(Icons.account_circle_outlined),
-              label: "Profile"),
+              label: ""),
         ],
         currentIndex: dashBoardViewModel.selectedIndex,
         onTap: (int index) {
