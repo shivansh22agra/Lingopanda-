@@ -1,6 +1,7 @@
 import 'package:boomer/firebase_options.dart';
 import 'package:boomer/view_models/dashBoardViewModel.dart';
 import 'package:boomer/view_models/homeViewModel.dart';
+import 'package:boomer/view_models/searchViewModel.dart';
 import 'package:boomer/views/dashBoard.dart';
 import 'package:boomer/views/dashBoardViews/home_page.dart';
 import 'package:boomer/views/main_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => HomeViewModel()),
+            ChangeNotifierProvider(create: (context) => SearchViewModel()),
             ChangeNotifierProvider(create: (context) => DashBoardViewModel())
           ],
           child: MaterialApp(
