@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class OtpScreen extends StatelessWidget {
+  
   static String id = "/otpScreen";
   OtpScreen({super.key});
   String otpCode = '';
@@ -73,10 +74,7 @@ class OtpScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () async {
                             Navigator.pushNamed(context, DashBoard.id);
-                            // final prefs =
-                            //     await SharedPreferences.getInstance();
-                            // prefs.setBool('loginotp', true);
-                            // onConfirm(otp, true);
+                          
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

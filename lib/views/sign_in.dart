@@ -50,7 +50,7 @@ class SignIn extends StatelessWidget {
                     children: [
                       SizedBox(height: 110.h),
                       Text(
-                        'Login to continue',
+                        'Login',
                         style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -60,14 +60,14 @@ class SignIn extends StatelessWidget {
                       Container(
                         height: 40.h,
                         decoration: BoxDecoration(
-                          color: Color(0xFFF0F0F0),
+                          color: const Color(0xFFF0F0F0),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               "+91",
                               style: GoogleFonts.poppins(
@@ -91,34 +91,31 @@ class SignIn extends StatelessWidget {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Container(
-                              //   color: Colors.black,
-                              //    height: 40.h,
-                              width: size.width * 0.6,
-                              child: TextField(
-                                controller: phoneController,
-                                cursorColor: Colors.grey,
-                                textAlignVertical: TextAlignVertical.center,
-                                maxLength: 10,
-                                style: GoogleFonts.poppins(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color:
-                                        const Color.fromRGBO(102, 102, 102, 1)),
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  // contentPadding:  EdgeInsets.only(
-                                  //   bottom: 3.h
-                                  // ),
-                                  counterText: '',
-                                  border: InputBorder.none,
-                                  prefixStyle:
-                                      GoogleFonts.poppins(fontSize: 16.sp),
-                                  hintStyle: GoogleFonts.poppins(
+                            SizedBox(
+                              width: 200.w,
+                              child: Center(
+                                child: TextField(
+                                  controller: phoneController,
+                                  cursorColor: Colors.grey,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  maxLength: 10,
+                                  style: GoogleFonts.poppins(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xFFADADAD)),
-                                  hintText: '9862436514',
+                                      color: const Color.fromRGBO(
+                                          102, 102, 102, 1)),
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    counterText: '',
+                                    border: InputBorder.none,
+                                    prefixStyle:
+                                        GoogleFonts.poppins(fontSize: 16.sp),
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xFFADADAD)),
+                                    hintText: '7017548212',
+                                  ),
                                 ),
                               ),
                             ),
@@ -144,36 +141,25 @@ class SignIn extends StatelessWidget {
                         height: 40.h,
                         child: ElevatedButton(
                           onPressed: () async {
-                            Navigator.pushNamed(context, OtpScreen.id);
-                            // final prefs =
-                            //     await SharedPreferences.getInstance();
-                            // prefs.setBool('loginotp', true);
-
-                            // FocusManager.instance.primaryFocus?.unfocus();
-                            // await FirebaseAuth.instance.verifyPhoneNumber(
-                            //   phoneNumber: "+91${phoneController.text}",
-                            //   verificationCompleted:
-                            //       (PhoneAuthCredential credential) {},
-                            //   verificationFailed:
-                            //       (FirebaseAuthException e) {},
-                            //   codeSent: (String verificationId,
-                            //       int? resendToken) async {
-                            //     await FirebaseAnalytics.instance
-                            //         .setCurrentScreen(
-                            //             screenName: 'OTPScreen');
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) => OTPWidgets(
-                            //           phoneNumber: phoneController.text,
-                            //           resendToken: resendToken,
-                            //           verificationId: verificationId,
-                            //         ),
-                            //       ),
-                            //     );
+                            await FirebaseAuth.instance
+                                .verifyPhoneNumber(
+                              phoneNumber: phoneController.text,
+                              verificationCompleted:
+                                  (PhoneAuthCredential credential) {},
+                              verificationFailed: (FirebaseAuthException e) {},
+                              codeSent:
+                                  (String verificationId, int? resendToken) {},
+                              codeAutoRetrievalTimeout:
+                                  (String verificationId) {},
+                            )
+                                .then((value) {
+                              // print('Value $value');
+                              Navigator.pushNamed(context, OtpScreen.id,
+                        );
+                            });
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
+                            backgroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
