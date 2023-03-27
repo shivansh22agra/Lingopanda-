@@ -51,9 +51,9 @@ class _MainPageState extends State<MainPage> {
           color: Colors.black,
           child: Stack(
             children: [
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 700),
-                curve: Curves.easeOut,
+              Positioned(
+                // duration: const Duration(milliseconds: 700),
+                // curve: Curves.easeOut,
                 top: 0,
                 left: 50,
                 child: Opacity(

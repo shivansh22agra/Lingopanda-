@@ -97,7 +97,6 @@ class SignIn extends StatelessWidget {
                               width: size.width * 0.6,
                               child: TextField(
                                 controller: phoneController,
-                                key: const Key('phone'),
                                 cursorColor: Colors.grey,
                                 textAlignVertical: TextAlignVertical.center,
                                 maxLength: 10,
