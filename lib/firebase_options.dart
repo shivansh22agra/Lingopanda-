@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '608857058872',
     projectId: 'boomer-cee36',
     storageBucket: 'boomer-cee36.appspot.com',
+    androidClientId: '608857058872-78ihjdim3duvq3gqd0arqp83oaucaa64.apps.googleusercontent.com',
     iosClientId: '608857058872-rv1ilkig14cc4qibl12hutvkf1o9kvkp.apps.googleusercontent.com',
     iosBundleId: 'com.example.boomer',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '608857058872',
     projectId: 'boomer-cee36',
     storageBucket: 'boomer-cee36.appspot.com',
+    androidClientId: '608857058872-78ihjdim3duvq3gqd0arqp83oaucaa64.apps.googleusercontent.com',
     iosClientId: '608857058872-rv1ilkig14cc4qibl12hutvkf1o9kvkp.apps.googleusercontent.com',
     iosBundleId: 'com.example.boomer',
   );

@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "608857058872-m2954cibm8ctv7oj5kd0l22g5mq3bdhf.apps.googleusercontent.com",
+          "client_id": "608857058872-78ihjdim3duvq3gqd0arqp83oaucaa64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.boomer",
+            "certificate_hash": "07658ec7bdbd40078369e81dd59ddb70ce579a6b"
+          }
+        },
+        {
+          "client_id": "608857058872-7vs3rha86def2skkd1u3iep9fuvavf17.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "608857058872-m2954cibm8ctv7oj5kd0l22g5mq3bdhf.apps.googleusercontent.com",
+              "client_id": "608857058872-7vs3rha86def2skkd1u3iep9fuvavf17.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "608857058872-rv1ilkig14cc4qibl12hutvkf1o9kvkp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.boomer"
+              }
             }
           ]
         }

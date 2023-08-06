@@ -90,6 +90,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+              
               Align(
                 alignment: Alignment.center,
                 child: GestureDetector(
