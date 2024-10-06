@@ -1,5 +1,4 @@
-import 'package:boomer/views/dashBoard.dart';
-import 'package:boomer/views/otp_screen.dart';
+import 'package:boomer/views/dashBoardViews/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -141,22 +140,7 @@ class SignIn extends StatelessWidget {
                         height: 40.h,
                         child: ElevatedButton(
                           onPressed: () async {
-                            await FirebaseAuth.instance
-                                .verifyPhoneNumber(
-                              phoneNumber: phoneController.text,
-                              verificationCompleted:
-                                  (PhoneAuthCredential credential) {},
-                              verificationFailed: (FirebaseAuthException e) {},
-                              codeSent:
-                                  (String verificationId, int? resendToken) {},
-                              codeAutoRetrievalTimeout:
-                                  (String verificationId) {},
-                            )
-                                .then((value) {
-                              // print('Value $value');
-                              Navigator.pushNamed(context, OtpScreen.id,
-                        );
-                            });
+                           
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -186,7 +170,7 @@ class SignIn extends StatelessWidget {
                           onPressed: () async {
                             signInWithGoogle().then((value) {
                               print('User value $value');
-                              Navigator.pushNamed(context, DashBoard.id);
+                              Navigator.pushNamed(context, HomePage.id);
                             });
                           },
                           style: ElevatedButton.styleFrom(

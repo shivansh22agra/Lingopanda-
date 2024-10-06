@@ -7,130 +7,87 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static String id = "/home";
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    final homeViewModel = context.read<HomeViewModel>();
+    homeViewModel.fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     HomeViewModel homeViewModel = context.watch<HomeViewModel>();
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: GestureDetector(
-          onTap: () {
-            homeViewModel.incrementCounter();
-          },
-          child: Column(children: [
-            SizedBox(
-              height: 30.h,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color(0xFF0C54BE),
+          title: Text(
+            'e-Shop',
+            style: GoogleFonts.poppins(
+              color: const Color(0xFFF5F9FD),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w700,
             ),
-            CarouselSlider(
-                items: [
-                  for (int i = 0; i < movies.length; i++)
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 3.w, vertical: 10.h),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.r),
-                          child: Image.network(movies[i].image,
-                              fit: BoxFit.cover, width: 1000.w)),
-                    )
-                ],
-                options: CarouselOptions(
-                    viewportFraction: .8,
-                    enlargeCenterPage: true,
-                    enlargeFactor: .2)),
-            SizedBox(
-              height: 20.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Continue viewing',
-                    style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.sp,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    'show all',
-                    style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
-                        color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Expanded(
-              child: ListView.builder(
+          ),
+        ),
+        body: homeViewModel.isLoading
+            ? const CircularProgressIndicator(
+                color: Color(0xFF0C54BE),
+              )
+            : GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                ),
+                itemCount: 2,
                 shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: movies.length,
-                itemBuilder: (BuildContext context, int index) {
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final product = homeViewModel.products[index];
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    width: 200.w,
-                    height: 200.h,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(10.r),
-                            child: Image.network(
-                              movies[index].image,
-                              fit: BoxFit.cover,
-                              width: 200.w,
-                              height: 190.h,
-                            )),
-                        SizedBox(
-                          height: 10.h,
+                        Image.network(
+                            'https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png'),
+                        15.verticalSpace,
+                        Text(
+                          'iPhone 9',
+                          style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
                         ),
                         Text(
-                          movies[index].name,
+                          'An apple mobile which is nothing like apple ...',
                           style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15.sp,
-                              color: Colors.white),
+                            color: Colors.black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            homeViewModel.changeisLike(index);
-                          },
-                          child: homeViewModel.islike[index]
-                              ? const Icon(
-                                  Icons.favorite,
-                                  color: Colors.white,
-                                )
-                              : const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                ),
-                        )
                       ],
                     ),
                   );
-                },
-              ),
-            ),
-            TextButton(
-              onPressed: () => throw Exception(),
-              child: const Text("Throw Test Exception"),
-            ),
-          ]),
-        ));
+                }));
   }
 }
