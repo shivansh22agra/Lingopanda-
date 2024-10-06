@@ -1,5 +1,7 @@
 import 'package:boomer/views/dashBoardViews/home_page.dart';
+import 'package:boomer/views/sign_Up.dart';
 import 'package:boomer/views/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +28,9 @@ class _MainPageState extends State<MainPage> {
           reverseTransitionDuration: const Duration(milliseconds: 800),
           pageBuilder: (_, __, ___) => FadeTransition(
             opacity: __,
-            child: const HomePage(),
+            child: FirebaseAuth.instance.currentUser != null
+                ? const HomePage()
+                : SignUp(),
           ),
         ),
       );
