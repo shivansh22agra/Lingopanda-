@@ -40,54 +40,66 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: homeViewModel.isLoading
-            ? const CircularProgressIndicator(
-                color: Color(0xFF0C54BE),
-              )
-            : GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFF0C54BE),
                 ),
-                itemCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final product = homeViewModel.products[index];
-                  return Container(
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+              )
+            : SingleChildScrollView(
+                child: GridView.builder(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.55,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
                     ),
-                    child: Column(
-                      children: [
-                        Image.network(
-                            'https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png'),
-                        15.verticalSpace,
-                        Text(
-                          'iPhone 9',
-                          style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            height: 0,
+                    itemCount: homeViewModel.productsData.products!.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final product =
+                          homeViewModel.productsData.products![index];
+                      return Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        Text(
-                          'An apple mobile which is nothing like apple ...',
-                          style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.network(product.thumbnail!),
+                            15.verticalSpace,
+                            Text(
+                              product.title.toString(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              product.description.toString(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }));
+                      );
+                    }),
+              ));
   }
 }

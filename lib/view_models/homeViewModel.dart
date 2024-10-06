@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class HomeViewModel extends ChangeNotifier {
-  List<Product> products = [];
+  Product productsData = Product();
   bool isLoading = false;
 
   Future fetchProducts() async {
@@ -16,11 +16,10 @@ class HomeViewModel extends ChangeNotifier {
         await http.get(Uri.parse('https://dummyjson.com/products'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      for (int i = 0; i < data['products'].length; i++) {
-        products.add(Product.fromJson(data[i]));
-      }
+
+      productsData = Product.fromJson(data);
       isLoading = false;
-      print('_____products______${products.length}');
+      print('_____products______${productsData.products!.length}');
       notifyListeners();
     } else {
       throw Exception('Failed to load products');
